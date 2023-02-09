@@ -9,8 +9,8 @@ const routes = [
   {
     path: "/",
     name: "home",
-    redirect: "/pk/",
-  },
+    redirect: "/pk/"
+  }
   {
     path: "/pk/",
     name: "pk_index",
@@ -35,10 +35,6 @@ const routes = [
     path: "/404/",
     name: "404",
     component: NotFound,
-  },
-  {
-    path: "/:catchAll(.*)",
-    redirect: "/404",
   },
 ];
 
