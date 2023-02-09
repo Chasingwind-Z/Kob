@@ -18,8 +18,7 @@ export default {
       url: "http://127.0.0.1:3000/pk/getbotinfo/",
       type: "get",
       success: (resp) => {
-        bot_name.value = resp.name;
-        bot_rating.value = resp.rating;
+        console.log(resp);
       },
     });
 
@@ -31,9 +30,4 @@ export default {
 };
 </script>
 
-<style>
-body {
-  background-image: url("@/assets/background.png");
-  background-size: cover;
-}
-</style>
+<style></style>
