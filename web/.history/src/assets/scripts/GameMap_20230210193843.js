@@ -60,7 +60,7 @@ export class GameMap extends AcGameObject {
       for (let j = 0; j < 1000; j++) {
         let r = parseInt(Math.random() * this.rows);
         let c = parseInt(Math.random() * this.cols);
-        if (g[r][c] || g[this.rows - 1 - r][this.cols - 1 - c]) continue;
+        if (g[r][c] || g[c][r]) continue;
         if ((r == this.rows - 2 && c == 1) || (r == 1 && c == this.cols - 2))
           continue;
 
@@ -102,8 +102,6 @@ export class GameMap extends AcGameObject {
 
   start() {
     for (let i = 0; i < 1000; i++) if (this.create_walls()) break;
-
-    this.add_listening_events();
   }
 
   update_size() {
@@ -118,7 +116,7 @@ export class GameMap extends AcGameObject {
   }
 
   check_ready() {
-    // 判断两条蛇是否都准备好下一回合了
+    // 判断俩条蛇是否都准备好下一回合
     for (const snake of this.snakes) {
       if (snake.status !== "idle") return false;
       if (snake.direction === -1) return false;
@@ -127,14 +125,14 @@ export class GameMap extends AcGameObject {
   }
 
   next_step() {
-    // 让两条蛇进入下一回合
+    // 两条蛇进入下一回合
     for (const snake of this.snakes) {
       snake.next_step();
     }
   }
 
   check_valid(cell) {
-    // 检测目标位置是否合法：没有撞到两条蛇的身体和障碍物
+    // 检测目标位置是否合法： 没有撞到两条蛇的身体和障碍物
     for (const wall of this.walls) {
       if (wall.r === cell.r && wall.c === cell.c) return false;
     }
@@ -146,7 +144,7 @@ export class GameMap extends AcGameObject {
         k--;
       }
       for (let i = 0; i < k; i++) {
-        if (snake.cells[i].r === cell.r && snake.cells[i].c === cell.c)
+        if (snake.cells[i].r === cell.r && snake.cell[i].c === cell.c)
           return false;
       }
     }
