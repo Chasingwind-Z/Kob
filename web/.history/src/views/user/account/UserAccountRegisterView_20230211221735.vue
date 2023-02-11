@@ -24,12 +24,12 @@
             />
           </div>
           <div class="mb-3">
-            <label for="confirmedPassword" class="form-label">确认密码</label>
+            <label for="confirmedpassword" class="form-label">确认密码</label>
             <input
-              v-model="confirmedPassword"
+              v-model="confirmedpassword"
               type="password"
               class="form-control"
-              id="confirmedPassword"
+              id="confirmedpassword"
               placeholder="请再次输入密码"
             />
           </div>

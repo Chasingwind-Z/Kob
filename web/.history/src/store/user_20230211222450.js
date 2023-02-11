@@ -7,7 +7,6 @@ export default {
     photo: "",
     token: "",
     is_login: false,
-    pulling_info: true, // 是否正在从云端拉取信息
   },
   getters: {},
   mutations: {
@@ -27,9 +26,6 @@ export default {
       state.token = "";
       state.is_login = false;
     },
-    updatePullingInfo(state, pulling_info) {
-      state.pulling_info = pulling_info;
-    },
   },
   actions: {
     login(context, data) {
@@ -42,7 +38,6 @@ export default {
         },
         success(resp) {
           if (resp.error_message === "success") {
-            localStorage.setItem("jwt_token", resp.token);
             context.commit("updateToken", resp.token);
             data.success(resp);
           } else {
@@ -63,6 +58,7 @@ export default {
         },
         success(resp) {
           if (resp.error_message === "success") {
+            localStorage.setItem("jwt_token", resp.token);
             context.commit("updateUser", {
               ...resp,
               is_login: true,

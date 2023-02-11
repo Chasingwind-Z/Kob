@@ -6,7 +6,7 @@ import UserBotIndexView from "../views/user/bot/UserBotIndexView";
 import NotFound from "../views/error/NotFound";
 import UserAccountLoginView from "../views/user/account/UserAccountLoginView";
 import UserAccountRegisterView from "../views/user/account/UserAccountRegisterView";
-import store from "../store/index";
+import stroe from "../store/index";
 
 const routes = [
   {
