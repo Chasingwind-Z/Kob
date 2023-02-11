@@ -4,7 +4,7 @@ import RecordIndexView from "../views/record/RecordIndexView";
 import RanklistIndexView from "../views/ranklist/RanklistIndexView";
 import UserBotIndexView from "../views/user/bot/UserBotIndexView";
 import NotFound from "../views/error/NotFound";
-import UserAccountLoginView from "../views/user/account/UserAccountLoginView";
+import UserAccountLoginView from "..views/user/account/UserAccountLoginView";
 import UserAccountRegisterView from "../views/user/account/UserAccountRegisterView";
 
 const routes = [
