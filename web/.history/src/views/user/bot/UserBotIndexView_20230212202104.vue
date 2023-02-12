@@ -213,7 +213,7 @@
 import { ref, reactive } from "vue";
 import $ from "jquery";
 import { useStore } from "vuex";
-import { Modal } from "bootstrap/dist/js/bootstrap";
+import { Modal } from "bootstrap/dist/js/bootstrap.min.js";
 import { VAceEditor } from "vue3-ace-editor";
 import ace from "ace-builds";
 
