@@ -12,7 +12,6 @@ export default {
     b_sx: 0,
     b_sy: 0,
     gameObject: null,
-    loser: "none", // none、all、A、B
   },
   getters: {},
   mutations: {
@@ -26,10 +25,10 @@ export default {
     updateStatus(state, status) {
       state.status = status;
     },
-    updateGame(state, game) {
+    updateGamemap(state, game) {
       state.gamemap = game.map;
       state.a_id = game.a_id;
-      state.a_sx = game.a_sx;
+      state.a_sy = game.a_sx;
       state.a_sy = game.a_sy;
       state.b_id = game.b_id;
       state.b_sx = game.b_sx;
@@ -37,9 +36,6 @@ export default {
     },
     updateGameObject(state, gameObject) {
       state.gameObject = gameObject;
-    },
-    updateLoser(state, loser) {
-      state.loser = loser;
     },
   },
   actions: {},

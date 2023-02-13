@@ -70,6 +70,8 @@ export class Snake extends AcGameObject {
     for (let i = k; i > 0; i--) {
       this.cells[i] = JSON.parse(JSON.stringify(this.cells[i - 1]));
     }
+
+    }
   }
 
   update_move() {
