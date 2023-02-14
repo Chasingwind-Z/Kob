@@ -54,15 +54,15 @@ export default {
     const store = useStore();
     let match_btn_info = ref("开始匹配");
     let bots = ref([]);
-    let select_bot = ref("-1");
+    let selected_bot = ref("-1");
 
     const click_match_btn = () => {
       if (match_btn_info.value === "开始匹配") {
         match_btn_info.value = "取消";
+        console.log(selected_bot.value);
         store.state.pk.socket.send(
           JSON.stringify({
             event: "start-matching",
-            bot_id: select_bot.value,
           })
         );
       } else {
@@ -94,7 +94,7 @@ export default {
       match_btn_info,
       click_match_btn,
       bots,
-      select_bot,
+      selected_bot,
     };
   },
 };
@@ -122,9 +122,11 @@ div.user-username {
   color: white;
   padding-top: 2vh;
 }
+
 div.user-select-bot {
   padding-top: 20vh;
 }
+
 div.user-select-bot > select {
   width: 60%;
   margin: 0 auto;
