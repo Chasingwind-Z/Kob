@@ -9,6 +9,7 @@ import com.kob.backend.mapper.RecordMapper;
 import com.kob.backend.mapper.UserMapper;
 import com.kob.backend.pojo.Bot;
 import com.kob.backend.pojo.User;
+import com.sun.org.apache.xpath.internal.operations.Mult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.LinkedMultiValueMap;
@@ -31,13 +32,13 @@ public class WebSocketServer {
     private User user;
     private Session session = null;
 
-    private static UserMapper userMapper;
+    public static UserMapper userMapper;
     public static RecordMapper recordMapper;
     private static BotMapper botMapper;
     public static RestTemplate restTemplate;
     public Game game = null;
     private final static String addPlayerUrl = "http://127.0.0.1:3001/player/add/";
-    private final static String removePlayerUrl = "http://127.0.0.1:3001/player/remove/";
+    private final static String removePlayerurl = "http://127.0.0.1:3001/player/remove/";
 
     @Autowired
     public void setUserMapper(UserMapper userMapper) {
@@ -84,7 +85,6 @@ public class WebSocketServer {
         User a = userMapper.selectById(aId), b = userMapper.selectById(bId);
         Bot botA = botMapper.selectById(aBotId), botB = botMapper.selectById(bBotId);
 
-
         Game game = new Game(
                 13,
                 14,
@@ -124,7 +124,7 @@ public class WebSocketServer {
         respB.put("opponent_username", a.getUsername());
         respB.put("opponent_photo", a.getPhoto());
         respB.put("game", respGame);
-        if (users.get(b.getId()) != null )
+        if (users.get(b.getId()) != null)
             users.get(b.getId()).sendMessage(respB.toJSONString());
     }
 
@@ -141,10 +141,11 @@ public class WebSocketServer {
         System.out.println("stop matching");
         MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
         data.add("user_id", this.user.getId().toString());
-        restTemplate.postForObject(removePlayerUrl, data, String.class);
+        restTemplate.postForObject(removePlayerurl, data, String.class);
     }
 
     private void move(int direction) {
+        System.out.println("move " + direction);
         if (game.getPlayerA().getId().equals(user.getId())) {
             if (game.getPlayerA().getBotId().equals(-1))  // 亲自出马
                 game.setNextStepA(direction);

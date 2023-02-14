@@ -1,5 +1,6 @@
 package com.kob.backend.service.impl.user.bot;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.kob.backend.mapper.BotMapper;
 import com.kob.backend.pojo.Bot;
 import com.kob.backend.pojo.User;
@@ -19,6 +20,7 @@ public class AddServiceImpl implements AddService {
 
     @Autowired
     private BotMapper botMapper;
+
     @Override
     public Map<String, String> add(Map<String, String> data) {
         UsernamePasswordAuthenticationToken authenticationToken =
@@ -43,7 +45,7 @@ public class AddServiceImpl implements AddService {
         }
 
         if (description == null || description.length() == 0) {
-            description = "这个用户很懒，什么也没留下";
+            description = "这个用户很懒，什么也没留下~";
         }
 
         if (description.length() > 300) {
@@ -58,6 +60,13 @@ public class AddServiceImpl implements AddService {
 
         if (content.length() > 10000) {
             map.put("error_message", "代码长度不能超过10000");
+            return map;
+        }
+
+        QueryWrapper<Bot> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("user_id", user.getId());
+        if (botMapper.selectCount(queryWrapper) >= 10) {
+            map.put("error_message", "每个用户最多只能创建10个Bot！");
             return map;
         }
 
